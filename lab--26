@@ -1,0 +1,22 @@
+//max even num
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int num, max;
+    max = 2;
+    cin >> num;
+    while (num != 0) {
+        if (num %  2 == 0){
+            if (num > max)
+            {max = num;}
+            }
+        cin >> num;
+        }
+            
+    cout << max << endl;
+    return 0;   
+
+}

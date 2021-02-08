@@ -1,0 +1,18 @@
+// my program finds out if 'N' is pow of two
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int N, flag_num = 1 ;
+    cin >> N;
+    while (flag_num < N){
+        flag_num *= 2;
+        }
+    if (flag_num == N){
+        cout << "Yess" << endl;
+        } 
+    else {cout << "No" << endl;}
+    return 0;  
+}
