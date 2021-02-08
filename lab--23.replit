@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    int a, n;
+    cout << "Write year" << endl;
+    cin >> a;
+    if (a % 400 == 0) {
+        n = 1 ;
+        } 
+    else if ((a % 100 == 0 ) && (a % 4 != 0)) {
+        n = 0 ;
+        } 
+    else  {
+        n = 1 ;
+        } 
+        
+    if  (n == 1) {
+        cout << "Yes" << endl;
+        }   
+    else  {
+        cout << "Nope" << endl;
+        } 
+
+    return 0;
+}
