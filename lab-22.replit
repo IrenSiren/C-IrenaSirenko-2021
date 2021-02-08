@@ -1,0 +1,20 @@
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    int a,b, r ;
+    cout << "Write first num" << endl;
+    cin >> a;
+    cout << "Write second num" << endl;
+    cin >> b;
+    while (a % b != 0) {
+        r =  a % b;
+        a = b;
+        b = r;
+        }
+    cout << b << endl;
+}
