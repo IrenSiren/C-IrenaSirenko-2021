@@ -1,0 +1,21 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    int a, b, r, c, d;
+    cout << "Write first num" << endl;
+    cin >> a;
+    cout << "Write second num" << endl;
+    cin >> b;
+    c = a;
+    d = b;
+    while (a % b != 0) {
+        r =  a % b;
+        a = b;
+        b = r;
+        }
+    cout << (c * d)/b << endl;
+}
