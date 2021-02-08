@@ -1,0 +1,26 @@
+//num of elem equal to max one
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    int num, max, n;
+    n = 0;
+    max = 0;
+    cin >> num;
+    while (num != 0) {
+        if (num > max){
+            max  = num;
+            n = 1;
+            }
+         else if (num == max) {
+             n = n + 1;  }    
+        cin >> num;
+        }
+    
+            
+    cout << n   << endl;
+    return 0;   
+
+}

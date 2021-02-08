@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
     int num, max;
-    max = 2;
+    max = 0;
     cin >> num;
     while (num != 0) {
         if (num %  2 == 0){
