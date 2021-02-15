@@ -4,21 +4,36 @@
 
 using namespace std;
 
-int* now_get_me_some_free_bytes (int n);
+int* now_get_me_some_free_bytes (int n)
+    {
+        int* massive = new int[n];
+        return massive; 
+    }
 void now_free_some_bytes (int* ptr)
+    {
+        delete ptr;
+    }
 
 int main()
 {
-    int* now_get_me_some_free_bytes (int n)
+    int n;
+    int s = 0;
+    cin >> n;
+    int* numbers = now_get_me_some_free_bytes (n);
+    for (int i = 0; i < n ; i++)
     {
-        int* massive = new int[n];
-        return missive 
+        cin >> numbers[i];
+        s = s + numbers[i] ;
     }
-    void now_free_some_bytes (int* ptr)
+    cout<< s << endl;
+    if (s % 2)
     {
-        delete ptr
+        cout << "No" << endl;
     }
-    
+    else
+    {
+      cout<< "Yes" << endl;
+    }
+    now_free_some_bytes (numbers)
     return 0;
 }
-
