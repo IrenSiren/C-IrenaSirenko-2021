@@ -10,8 +10,8 @@ int main()
     cout << "Your number ";
     cin >> n ;
      int *numbers = new int[n + 1];
-    for (int i = 0; i < n + 1; i++)
-    numbers[i] = i;
+    for (int i = 0; i < n + 1; i++){
+      numbers[i] = i;}
     for (int p = 2; p*p < n + 1 ; p++)
     {
         if (numbers[p] != 0)
