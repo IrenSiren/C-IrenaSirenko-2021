@@ -1,0 +1,24 @@
+//lab 3 D problem
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int* now_get_me_some_free_bytes (int n);
+void now_free_some_bytes (int* ptr)
+
+int main()
+{
+    int* now_get_me_some_free_bytes (int n)
+    {
+        int* massive = new int[n];
+        return missive 
+    }
+    void now_free_some_bytes (int* ptr)
+    {
+        delete ptr
+    }
+    
+    return 0;
+}
+
