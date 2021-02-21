@@ -25,7 +25,6 @@ int main()
         cin >> numbers[i];
         s = s + numbers[i] ;
     }
-    cout<< s << endl;
     if (s % 2)
     {
         cout << "No" << endl;
@@ -34,6 +33,6 @@ int main()
     {
       cout<< "Yes" << endl;
     }
-    now_free_some_bytes (numbers)
+    now_free_some_bytes (numbers);
     return 0;
 }
