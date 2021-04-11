@@ -1,0 +1,319 @@
+
+#include <iostream>
+using namespace std;
+
+//Change elements
+void swap (int* a, int* b)
+{
+  int t = *a;
+  *a = *b;
+  *b = t;
+}
+//incresing
+void bubble_sort (int* mass, int n)
+{
+  for (int j = n; j >= 0; j--)
+  {
+    for (int i = 0 ; i < j-1 ; i++)
+      {
+        if (mass[i] >= mass[i+1])
+        {
+          swap(mass[i], mass[i+1]);
+        }
+
+      }
+  }
+}
+
+void shaker_sort (int* mass, int n)
+{
+  int start = 0;
+  int end  = n - 1 ;
+  while (start <= end)
+  {
+    for (int i = start ; i < end  ; i++)
+      {
+        if (mass[i] >= mass[i+1])
+        {
+          swap(mass[i], mass[i+1]);
+        }
+      }
+    end = end - 1;
+    for (int j = end ; j > start ; j--)
+    {
+      if (mass[j - 1] >= mass[j])
+      {
+        swap(mass[j - 1], mass[j]);
+      }
+    }
+    start = start + 1;
+  }
+}
+
+void insert_sort(int* mass, int n)
+{
+  for (int i = 1; i < n ; i++)
+  {
+    int num = mass[i];
+    int j = i - 1;
+    while ((j >= 0) && (mass[j] > num))
+    {
+      mass[j + 1] = mass[j];
+      j = j - 1;
+    }
+    mass[j + 1] = num;
+  }
+}
+
+void shell_sort(int* mass, int n)
+{
+  int d = n/2;
+
+  while (d > 0 )
+  {
+    for (int i = d; i < n; i++) 
+    {
+      int t = i;
+      int step = t - d;
+      while (step >= 0 && mass[step] > mass[t] )
+      {
+        swap(mass[step], mass[t]);
+        t = step;
+        step = t - d;
+      }
+    }
+    d = d/2;
+  }
+}
+
+
+
+void selction_sort(int* mass, int n)
+{
+  for (int j = 0; j < n - 1; j++)
+  {
+    //current minimum 
+    int m = j;
+    for (int i = j + 1; i < n; i++)
+    {
+      if (mass[i] <= mass[m])
+      {
+        m = i ; 
+      }
+    }
+    if (m != j)
+    {
+      swap(mass[m], mass[j]);
+    }
+  }
+}
+
+int* merge (int* mass1, int n1, int* mass2, int n2 )
+{
+  int combined_mass[n1 + n2];
+  int N;
+  if (n1 < n2)
+  {
+    N = n1;
+  }
+  else
+  {
+    N = n2;
+  }
+  int flag1 = 0;
+  int flag2 = 0;
+  int k = 0;
+  for (int i = 0; i < N; i++)
+  {
+    if ( mass1[i] > mass2[i] )
+    {
+      combined_mass[i] = mass2[i];
+      delete &mass2[i];
+      flag2 = flag2 + 1;
+    }
+    else
+    {
+      combined_mass[i] = mass1[i];
+      delete &mass1[i];
+      flag1 = flag1 + 1;
+    }
+    k++;
+  }
+
+  while (flag1 <= n1)
+  {
+    combined_mass[k] = mass1[flag1];
+    flag1 = flag1 + 1;
+    k++;
+
+  }
+
+  while (flag2 <= n2)
+  {
+    combined_mass[k] = mass1[flag2];
+    flag2 = flag2 + 1;
+    k++;
+
+  }
+  return combined_mass;
+}
+
+
+int* merge_sort1(int* mass, int n)
+{
+  if (n == 1)
+  {
+    return mass;
+  }
+  else 
+  {
+    int arr1[n/2];
+    int arr2[n - n/2];
+    for(int i = 0; i < n/2 ; i++)
+    {
+      arr1[i] = mass[i];
+    }
+    for(int i = n/2 + 1; i < n; i++)
+    {
+      arr2[i] = mass[i];
+    }
+    arr1 = merge_sort(arr1, );
+    arr2 = merge_sort(arr2, );
+    return merge(arr1, n/2 , arr2, n - n/2);
+  }
+}
+
+void merge_itt (int* mass, int start, int slice, int end)
+{
+  int n1 = (end + start)/2; 
+  int n2 = end - n1;
+  int mass_1[n1], mass_2[n2];
+
+  for (int i = 0; i < n1; i++)
+  {
+    mass_1[i] = mass[start + i];
+  }
+  for (int j = 0; j < n2; j++)
+  {
+    mass_2[j] = mass[slice + 1 + j];
+  }
+
+  int N;
+  if (n1 < n2)
+  {
+    N = n1;
+  }
+  else
+  {
+    N = n2;
+  }
+  int flag1 = 0;
+  int flag2 = 0;
+  int k = 0;
+  for (int i = 0; i < N; i++)
+  {
+    if ( mass_1[i] > mass_2[i] )
+    {
+      mass[start + i] = mass_2[i];
+      flag2 = flag2 + 1;
+    }
+    else
+    {
+      mass[start + i] = mass_1[i];
+    
+      flag1 = flag1 + 1;
+    }
+    k++;
+  }
+
+  while (flag1 <= n1)
+  {
+    mass[start + k] = mass_1[flag1];
+    flag1 = flag1 + 1;
+    k++;
+
+  }
+
+  while (flag2 <= n2)
+  {
+    mass[start + k] = mass_2[flag2];
+    flag2 = flag2 + 1;
+    k++;
+
+  }
+
+
+  
+
+}
+
+
+void merge_sort2(int* mass, int start, int end)
+{
+  if(start == end)
+  {
+    return;
+  }
+  int left_end  = (end + start)/2;
+  merge_sort2(mass, start, left_end);
+  merge_sort2(mass,left_end + 1, end);
+  merge_itt (mass, start, left_end, end);
+
+}
+
+
+
+
+//Quicksort
+
+int division(int* mass, int start, int end)
+{
+  int flag = mass [end];
+  int p = start;
+  for (int i = start; i < end - 1 ; i++)
+  {
+    if (mass[i] <= flag )
+    {
+      swap( mass[i], mass[p]);
+      p = p + 1;
+    }
+  }
+  swap(mass[p], mass[end]);
+  return p;
+}
+
+
+void quick_sort(int* mass, int start, int end )
+{
+  if (start < end ){
+  int p = division( mass, start, end);
+  quick_sort(mass, start, p - 1);
+  quick_sort(mass, start, p - 1);
+  }
+  else 
+  {
+    return;
+  }
+}
+
+
+
+int main () 
+{ 
+  int m;
+  cin >> m;
+  int ar[m];
+  for (int i = 0 ; i < m ; i++)
+  {
+    cin >> ar[i];
+  }
+  shell_sort(ar, m);
+  for (int i = 0 ; i < m ; i++)
+  {
+    cout << ar[i] << endl;
+  }
+
+
+}
+
+ 
