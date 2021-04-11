@@ -1,0 +1,159 @@
+#include <iostream>
+using namespace std;
+
+
+struct Leaf 
+{
+  int data;
+  Leaf* left;
+  Leaf* right;
+  Leaf* last;
+};
+
+
+ struct Tree
+ { 
+   Leaf* root = nullptr;
+   int count = 0;
+ };
+
+ void add (int value, Leaf* root)
+ {
+   Leaf* val = new Leaf();
+   val->data = value;
+   Leaf* current = root;
+   if (root == nullptr)
+   {
+     root = val; 
+   }
+   else
+   {
+    if (current-> data > val->data)
+    {
+      if(root->left != nullptr)
+      {
+      add(value, root-> left);
+      }
+      else
+      {
+        root->left = val;
+      }
+    }
+
+    if (current-> data <= val->data)
+    {
+      if(root->right != nullptr)
+      {
+      add(value, root-> right);
+      }
+      else
+      {
+        root->right = val;
+      }
+    }
+   }
+ }
+
+
+Leaf* find (int value, Leaf* root)
+{
+  Leaf* val = new Leaf();
+  val->data = value;
+  Leaf* current = root;
+  while(current->data != value)
+  {
+    if (current-> data < value)
+    {
+      current = current->right;
+    }
+    else
+    {
+      current = current->right;
+    }
+    if(current == nullptr)
+    {
+      return nullptr;
+    }
+  }
+  return current;
+}
+
+void remove_by_value(int value, Leaf* root)
+{
+  Leaf* current = root;
+  while(current->data != value)
+  {
+    if (current-> data < value)
+    {
+      current = current->right;
+    }
+    else
+    {
+      current = current->right;
+    }
+    if(current == nullptr)
+    {
+      return;
+    }
+  }
+  if (current->left == nullptr and current->right == nullptr)
+  {
+    delete current;
+  }
+  if(current->left == nullptr and current->right != nullptr )
+  {
+    if(current->last->data <= value)
+    {
+      current->last->right = current->right;
+    }
+    else
+    {
+      current->last->left = current->right;
+    }
+    delete current;
+  }
+  if(current->left != nullptr and current->right == nullptr )
+  {
+    if(current->last->data <= value)
+    {
+      current->last->right = current->left;
+    }
+    else
+    {
+      current->last->left = current->left;
+    }
+    delete current;
+  }
+
+  if(current->left != nullptr and current->right != nullptr)
+  {
+    Leaf* temporary = current->right;
+    while (temporary->left != nullptr)
+    {
+      temporary = temporary->left;
+    }
+    temporary->right = current->right;
+    temporary->left = current->left;
+
+    if(current->last->data <= value)
+    {
+      current->last->right = temporary;
+    }
+    else
+    {
+      current->last->left = temporary;
+    }
+    delete current;
+    
+  }
+
+
+}
+
+
+
+
+int main()
+{
+
+}
