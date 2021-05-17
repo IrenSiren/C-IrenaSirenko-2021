@@ -1,0 +1,183 @@
+
+#include <iostream>
+using namespace std;
+
+struct Leaf 
+{
+  int data;
+  Leaf* left;
+  Leaf* right;
+  Leaf* last;
+  int H_left; 
+  int H_right; 
+  Leaf(int x)
+  {
+    data = x;
+    left = nullptr;
+    right = nullptr;
+    last = nullptr;
+    H_left = 0;
+    H_right = 0;
+  }
+};
+
+
+ struct Tree
+ { 
+   Leaf* root;
+   int count;
+   Tree(int x)
+   {
+     root = new Leaf(x);
+     count = 1;
+   }
+ };
+
+
+void balance (Leaf* current)
+ {
+   if ((current->H_left - current->H_left <= 1)and (current->H_left - current->H_left >= -1))
+   {
+     return;
+   }
+   else
+   {
+    if (current->H_right - current->H_left == 2)
+    {
+      //small left
+      if (current->right->H_left <= current->right->H_right )
+      {
+        if (current->last->data >= current->data )
+        {
+          current->last->left = current->right;
+        }
+        else
+        {
+          current->last->right = current->right;
+        }
+        Leaf* temp;
+        temp = current->right->left;
+        current->right->left = current;
+        current->right = temp;
+      }
+
+      //big left
+      if(current->right->H_left > current->right->H_right )
+      {
+        if (current->last->data >= current->data )
+        {
+          current->last->left = current->right->left;
+        }
+        else
+        {
+          current->last->right = current->right->left;
+        }
+        Leaf* change_R;
+        Leaf* change_L ;
+        change_R = current->right->left->right;
+        change_L = current->right->left->left;
+        current->right->left->right = current->right;
+        current->right->left->left = current;
+        current->right->left = change_R;
+        current->right = change_L;
+      }
+    }
+    else if (current->H_right - current->H_left == -2)
+    {
+      // small right
+      if(current->left->H_right <= current->left->H_left )
+      {
+        if (current->last->data >= current->data )
+        {
+          current->last->left = current->left;
+        }
+        else
+        {
+          current->last->right = current->left;
+        }
+        Leaf* temp;
+        temp = current->left->right;
+        current->left->right = current;
+        current->left = temp;
+
+      }
+      //big right
+      if(current->left->H_right > current->left->H_left )
+      {
+        if (current->last->data >= current->data )
+        {
+          current->last->left = current->left->right;
+        }
+        else
+        {
+          current->last->right = current->left->right;
+        }
+
+        Leaf* change_R1;
+        Leaf* change_L1 ;
+        change_R1 = current->left->right->right;
+        change_L1 = current->left->right->left;
+        current->left->right->right = current->left;
+        current->left->right->left = current;
+        current->right->left = change_R1;
+        current->right = change_L1;
+      }
+    }
+    else
+    {
+      balance (current->right);
+      balance (current->left);
+    }
+  }
+}
+
+
+
+void add_and_balance (int value, Leaf* root)
+ {
+   Leaf* val = new Leaf();
+   val->data = value;
+   Leaf* current = root;
+   if (root == nullptr)
+   {
+     root = val; 
+   }
+   else
+   {
+    if (current-> data > val->data)
+    {
+      if(root->left != nullptr)
+      {
+      add_and_balance(value, root-> left);
+      }
+      else
+      {
+        root->left = val;
+      }
+    }
+
+    if (current-> data <= val->data)
+    {
+      if(root->right != nullptr)
+      {
+      add_and_balance(value, root-> right);
+      }
+      else
+      {
+        root->right = val;
+      }
+    }
+    balance(root);
+   }
+ }
+
+
+
+int main() {
+  Tree t = Tree(5);
+  int n = 10;
+  for (int i; i < n; i++)
+  {
+    
+  }
+}
